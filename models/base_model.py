@@ -15,7 +15,7 @@ class BaseModel:
         self.updated_at = self.get_time_iso()
 
     def get_time_iso(self):
-        return str(datetime.isoformat(datetime.now()))
+        return datetime.isoformat(datetime.now())
 
     def __str__(self):
         '''function str'''
