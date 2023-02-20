@@ -9,10 +9,22 @@ from datetime import datetime
 
 class BaseModel:
     '''generate class BaseModel'''
-    def __init__(self):
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        if not kwargs:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+        else:
+            self.update(kwargs)
+
+
+    def update(self, kwargs):
+        if kwargs and len(kwargs) > 0:
+            for k, v in kwargs.items():
+                if k in ["created_at", "updated_at"]:
+                    setattr(self, k, datetime.fromisoformat(v))
+                elif k is not "__class__":
+                    setattr(self, k,  v)
 
     def __str__(self):
         '''function str'''
