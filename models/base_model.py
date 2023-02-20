@@ -1,26 +1,33 @@
 #!/usr/bin/python3
-""" Doc """
-
-
+'''
+    Write a class BaseModel that defines all
+    common attributes/methods for other classes:
+'''
 import uuid
 from datetime import datetime
 
 
 class BaseModel:
-    """ class BaseModel """
-
+    '''generate class BaseModel'''
     def __init__(self):
         self.id = str(uuid.uuid4())
-        self.created_ad = datetime.isoformat(datetime.now())
-        self.updated_at = datetime.isoformat(datetime.now())
+        self.created_at = self.get_time_iso()
+        self.updated_at = self.get_time_iso()
+
+    def get_time_iso(self):
+        return datetime.isoformat(datetime.now())
 
     def __str__(self):
-        return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
-    
+        '''function str'''
+        clas = "[{}] ({}) {}".format(type(self).__name__, self.id, self.to_dict())
+        return clas
+
     def save(self):
-        self.updated_at = datetime.isoformat(datetime.now())
+        '''function that update public instance'''
+        self.updated_at = self.get_time_iso()
 
     def to_dict(self):
-        dictionnary = self.__dict__
-        dictionnary['__class__'] = f"{type(self).__name__}"
+        '''create dictionnary'''
+        dictionnary = self.__dict__.copy()
+        dictionnary['__class__'] = type(self).__name__
         return dictionnary
