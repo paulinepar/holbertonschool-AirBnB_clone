@@ -23,7 +23,7 @@ class BaseModel:
             for k, v in kwargs.items():
                 if k in ["created_at", "updated_at"]:
                     setattr(self, k, datetime.fromisoformat(v))
-                elif k is not "__class__":
+                elif k != "__class__":
                     setattr(self, k,  v)
 
     def __str__(self):
