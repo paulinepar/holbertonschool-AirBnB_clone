@@ -11,23 +11,21 @@ class BaseModel:
     '''generate class BaseModel'''
     def __init__(self):
         self.id = str(uuid.uuid4())
-        self.created_at = self.get_time_iso()
-        self.updated_at = self.get_time_iso()
-
-    def get_time_iso(self):
-        return datetime.isoformat(datetime.now())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
     def __str__(self):
         '''function str'''
-        clas = "[{}] ({}) {}".format(type(self).__name__, self.id, self.to_dict())
-        return clas
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.to_dict())
 
     def save(self):
         '''function that update public instance'''
-        self.updated_at = self.get_time_iso()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         '''create dictionnary'''
         dictionnary = self.__dict__.copy()
         dictionnary['__class__'] = type(self).__name__
+        dictionnary['created_at'] = self.created_at.isoformat()
+        dictionnary['updated_at'] = self.updated_at.isoformat()
         return dictionnary
