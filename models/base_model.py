@@ -33,8 +33,8 @@ class BaseModel:
     def __str__(self):
         '''function str'''
         d = self.to_dict().copy();
-        del d["__class__"]
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, d)
+        return "[{}] ({}) {}".format(BaseModel.__name__, self.id, d)
+
 
     def save(self):
         '''function that update public instance'''
