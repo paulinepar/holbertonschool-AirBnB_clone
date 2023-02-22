@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ Doc """
-
+from models.base_model import BaseModel
 import cmd
 
 
@@ -23,6 +23,15 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
+    def do_create(self, args):
+        if args == "":
+            print("** class name missing **")
+            return
+        try:
+            new_instance = eval(args)()
+            print(new_instance.id)
+        except NameError:
+            print("** class doesn't exist **", new_instance)
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
