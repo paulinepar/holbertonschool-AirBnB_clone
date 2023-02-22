@@ -33,8 +33,10 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path, "r", encoding='utf-8') as file:
                 data = json.loads(file.read())
-                for k, v in data.items():
-                    FileStorage.__objects[k] = BaseModel(None, v)
-                return json.loads(FileStorage.__objects)
+                for k in data.keys(): 
+                    v = data[k]
+                    FileStorage.__objects[k] = BaseModel(**v)
+
+                return FileStorage.__objects
         except:
             return {};
