@@ -18,6 +18,8 @@ class BaseModel:
             storage.new(self)
         else:
             self.update(kwargs)
+        
+
 
 
     def update(self, kwargs):
@@ -30,16 +32,21 @@ class BaseModel:
 
     def __str__(self):
         '''function str'''
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.to_dict())
+        d = self.to_dict().copy();
+        del d["__class__"]
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, d)
 
     def save(self):
         '''function that update public instance'''
         self.updated_at = datetime.now()
+        storage.new(self)
         storage.save()
+        print("[BaseModel] Saved")
 
     def to_dict(self):
         '''create dictionnary'''
         dictionnary = self.__dict__.copy()
+
         dictionnary['__class__'] = type(self).__name__
         dictionnary['created_at'] = self.created_at.isoformat()
         dictionnary['updated_at'] = self.updated_at.isoformat()
