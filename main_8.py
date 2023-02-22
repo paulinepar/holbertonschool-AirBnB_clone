@@ -45,13 +45,14 @@ for id in ids:
     obj_reloaded = all_reloaded.get(id)
     if obj_reloaded is None:
         obj_reloaded = all_reloaded.get("{}.{}".format("BaseModel", id))
-    print(obj_reloaded, objs_by_id[id])
     obj_created = objs_by_id[id]
-    print(type(obj_reloaded), type(obj_created))
 
-    print(obj_reloaded.id == obj_created.id)
-    print(obj_reloaded.created_at == obj_created.created_at)
-    print(obj_reloaded.updated_at == obj_created.updated_at)
+    print(obj_reloaded.created_at, obj_created.created_at)
+    print(obj_reloaded.updated_at, obj_created.updated_at)
+    
+    # print(obj_reloaded.id == obj_created.id)
+    # print(obj_reloaded.created_at == obj_created.created_at)
+    # print(obj_reloaded.updated_at == obj_created.updated_at)
 
 try:
     os.remove(file_path)
