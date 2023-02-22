@@ -41,7 +41,6 @@ class BaseModel:
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
-        print("[BaseModel] Saved")
 
     def to_dict(self):
         '''create dictionnary'''

@@ -22,7 +22,6 @@ class FileStorage:
         """ cette méthode sérialise le dictionnaire __objects et l'enregistre dans le fichier JSON """
         with open(FileStorage.__file_path, "w", encoding='utf-8') as file:
             file.write(json.dumps(FileStorage.__objects))
-        print("[FileStorage] File saved")
 
             
     def reload(self):
