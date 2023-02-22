@@ -13,14 +13,17 @@ class HBNBCommand(cmd.Cmd):
 
     def help_EOF(self):
         return True
-    
+
     def do_EOF(self, line):
+        """ End of File with Ctrl ^D"""
         return True
 
     def do_quit(self, line):
+        """ Quit the program in writing quit"""
         return True
 
     def emptyline(self):
+        """ an empty line + ENTER shouldnt execute anything """
         pass
 
 
