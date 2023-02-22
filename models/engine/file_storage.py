@@ -16,20 +16,25 @@ class FileStorage:
     def new(self, obj):
         """ adds the instance of an object to the dictionary """
         key = "{}.{}".format(type(obj).__name__, obj.id)
-        FileStorage.__objects[key] = obj.to_dict()
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """ cette méthode sérialise le dictionnaire __objects et l'enregistre dans le fichier JSON """
         with open(FileStorage.__file_path, "w", encoding='utf-8') as file:
-            file.write(json.dumps(FileStorage.__objects))
+            d = {}
+            for k, v in FileStorage.__objects.items():
+                d[k] = v.to_dict()
+            file.write(json.dumps(d))
 
             
     def reload(self):
         """ cette méthode désérialise le fichier JSON pour créer des instances d'objets. """
+        from models.base_model import BaseModel
         try:
             with open(FileStorage.__file_path, "r", encoding='utf-8') as file:
-                data = file.read()
-                FileStorage.__objects = json.loads(data)
+                data = json.loads(file.read())
+                for k, v in data.items():
+                    FileStorage.__objects[k] = BaseModel(None, v)
                 return json.loads(FileStorage.__objects)
         except:
             return {};
