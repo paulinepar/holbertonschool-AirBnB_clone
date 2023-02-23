@@ -66,12 +66,13 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, args):
         '''function that destroy an instance'''
         arguments = args.split()
-        if len(args) == 0:
+        if len(arguments) == 0:
             print("** class name missing **")
             return
         if len(arguments) == 1:
-            print("** class doesn't exist **")
+            print("** instance id missing **")
             return
+
         try:
             classes = eval(arguments[0])
             if not classes.__init__:
@@ -83,8 +84,8 @@ class HBNBCommand(cmd.Cmd):
                 return
             #  Successfull delete
         except NameError:
-            print("** instance id missing **")
-
+            print("** class doesn't exist **")
+            
     def do_all(self, args):
         '''for print all string representation'''
         arguments = args.split()
