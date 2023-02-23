@@ -9,9 +9,19 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
+
+    def get(self, id):
+        return self.all().get(id)
     
     def all(self):
         return FileStorage.__objects
+    
+    def destroy(self, id):
+        if FileStorage.__objects.get(id):
+            del FileStorage.__objects[id]
+            self.save()
+            return True
+        return False
         
     def new(self, obj):
         """ adds the instance of an object to the dictionary """
@@ -39,4 +49,4 @@ class FileStorage:
 
                 return FileStorage.__objects
         except:
-            return {};
+            return {}
