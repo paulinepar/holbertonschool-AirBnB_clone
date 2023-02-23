@@ -55,9 +55,11 @@ class HBNBCommand(cmd.Cmd):
                 raise NameError("** class not found **")
             id = '{}.{}'.format(classes.__name__, arguments[1])
             obj = storage.get(id)
+            
             if obj is None:
                 print("** no instance found **")
                 return
+            print(obj)
         except NameError:
             print("** class doesn't exist **")
             
