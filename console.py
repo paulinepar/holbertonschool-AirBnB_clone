@@ -97,14 +97,13 @@ class HBNBCommand(cmd.Cmd):
                 for obj in all_class.values():
                     list.append(str(obj))
                 print(list)
-                return;
-            classe = eval(arguments[0])
-            
-            for obj in all_class.values():
-                if isinstance(obj, classe):
-                    list.append(str(obj))
-
-            print(list)
+            else:
+                classe = eval(arguments[0])
+                
+                for obj in all_class.values():
+                    if isinstance(obj, classe):
+                        list.append(str(obj))
+                print(list)
         except NameError:
             print("** class doesn't exist **")
 
