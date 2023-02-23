@@ -52,7 +52,7 @@ class FileStorage:
                 data = json.loads(file.read())
                 for k in data.keys(): 
                     v = data[k]
-                    FileStorage.__objects[k] = eval(v.__class__)(**v)
+                    FileStorage.__objects[k] = BaseModel(**v)
 
                 return FileStorage.__objects
         except:

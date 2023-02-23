@@ -47,7 +47,7 @@ class BaseModel:
         '''create dictionnary'''
         dictionnary = self.__dict__.copy()
 
-        dictionnary['__class__'] = type(self).__name__
+        dictionnary['__class__'] = "BaseModel"
         dictionnary['created_at'] = self.created_at.isoformat()
         dictionnary['updated_at'] = self.updated_at.isoformat()
         return dictionnary
