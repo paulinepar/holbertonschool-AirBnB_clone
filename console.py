@@ -38,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
         except NameError:
-            print("** class doesn't exist **", new_instance)
+            print("** class doesn't exist **")
 
     def do_show(cls, args):
         '''for print instance class'''
@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
 
             print(list)
         except NameError:
-                print("** class doesn't exist **")
+            print("** class doesn't exist **")
 
     def do_update(self, args):
         '''function that update'''
