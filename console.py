@@ -89,9 +89,15 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         '''for print all string representation'''
         arguments = args.split()
+
         all_class = storage.all()
         list = []
         try:
+            if len(arguments) == 0:
+                for obj in all_class.values():
+                    list.append(str(obj))
+                print(list)
+                return;
             classe = eval(arguments[0])
             
             for obj in all_class.values():
@@ -105,16 +111,16 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, args):
         '''function that update'''
         arguments = args.split()
-        if not arguments[0]:
+        if len(arguments) == 0:
             print("** class name missing **")
             return
-        if not arguments[1]:
+        if len(arguments) == 1:
             print("** instance id missing **")
             return
-        if not arguments[2]:
+        if len(arguments) == 2:
             print("** attribute name missing **")
             return
-        if not arguments[3]:
+        if len(arguments) == 3:
             print("** value missing **")
             return
         try:
