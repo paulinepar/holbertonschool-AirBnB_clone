@@ -9,4 +9,4 @@ class TestFileStorage(unittest.TestCase):
 
     def test_all(self):
         classe = FileStorage()
-        self.assertNotEqual(classe.all(), "{}")
+        self.assertNotEqual(classe.all(), {})
