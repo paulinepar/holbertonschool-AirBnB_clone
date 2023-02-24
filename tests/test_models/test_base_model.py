@@ -14,3 +14,10 @@ class TestBaseModel(unittest.TestCase):
         classe = BaseModel()
         classe.update({"name": "bonjour"})
         self.assertEqual(classe.name, "bonjour")
+        
+    def test_init(self):
+        obj = {"checker": "OK"}
+        classe = BaseModel(**obj)
+        self.assertEqual(classe.checker, "OK")
+        
+    
