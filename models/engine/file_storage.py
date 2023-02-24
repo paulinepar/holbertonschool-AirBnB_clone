@@ -46,13 +46,14 @@ class FileStorage:
         from models.review import Review
         from models.user import User
         from models.amenity import Amenity
-
-        try:
+        try: 
             with open(FileStorage.__file_path, "r", encoding='utf-8') as file:
                 data = json.loads(file.read())
                 for k in data.keys(): 
                     v = data[k]
-                    FileStorage.__objects[k] = BaseModel(**v)
+                
+                    FileStorage.__objects[k] = eval(v['__class__'])(**v)
+                    print(FileStorage.__objects[k])
 
                 return FileStorage.__objects
         except:
