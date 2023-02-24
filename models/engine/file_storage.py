@@ -39,17 +39,6 @@ class FileStorage:
             
     def reload(self):
         """ cette méthode désérialise le fichier JSON pour créer des instances d'objets. """
-        from models.base_model import BaseModel
-<<<<<<< HEAD
-=======
-        from models.city import City
-        from models.state import State
-        from models.place import Place
-        from models.review import Review
-        from models.user import User
-        from models.amenity import Amenity
-
->>>>>>> 8b2f1cc4caf5da420dab141c2246355e2686172e
         try:
             with open(FileStorage.__file_path, "r", encoding='utf-8') as file:
                 data = json.loads(file.read())
