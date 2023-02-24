@@ -53,7 +53,6 @@ class FileStorage:
                     v = data[k]
                 
                     FileStorage.__objects[k] = eval(v['__class__'])(**v)
-                    print(FileStorage.__objects[k])
 
                 return FileStorage.__objects
         except:
