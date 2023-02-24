@@ -33,8 +33,8 @@ class BaseModel:
 
     def __str__(self):
         '''function str'''
-        d = self.to_dict().copy();
-        return "[{}] ({}) {}".format(BaseModel.__name__, self.id, d)
+        d = self.to_dict().copy()
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, d)
 
 
     def save(self):
@@ -47,7 +47,7 @@ class BaseModel:
         '''create dictionnary'''
         dictionnary = self.__dict__.copy()
 
-        dictionnary['__class__'] = "BaseModel"
+        dictionnary['__class__'] = type(self).__name__
         dictionnary['created_at'] = self.created_at.isoformat()
         dictionnary['updated_at'] = self.updated_at.isoformat()
         return dictionnary
