@@ -31,7 +31,7 @@ git clone https://github.com/HugoCLI/holbertonschool-AirBnB_clone.git
 cd holbertonschool-AirBnB_clone
 ```
 <br><br>
-## [Contributors](AUTHOR)
+## [Contributors](AUTHORS)
 
 - Valentin Melia <valentin.melia@holbertonstudents.com>
 - Hugo Chilemme <huogo.chilemme@holbertonstudents.com>
