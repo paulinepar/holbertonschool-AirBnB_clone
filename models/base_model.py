@@ -32,7 +32,6 @@ class BaseModel:
         d = self.to_dict().copy()
         return "[{}] ({}) {}".format(type(self).__name__, self.id, d)
 
-
     def save(self):
         '''function that update public instance'''
         self.updated_at = datetime.now()
