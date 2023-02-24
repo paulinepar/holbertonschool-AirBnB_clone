@@ -6,3 +6,6 @@ class TestFileStorage(unittest.TestCase):
         classe = FileStorage()
         self.assertEqual(classe.reload(), {})
 
+    def test_all(self):
+        classe = FileStorage()
+        self.assertEqual(classe.all(), {})
