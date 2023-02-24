@@ -11,7 +11,6 @@ from models import storage
 class BaseModel:
     '''generate class BaseModel'''
     def __init__(self, *args, **kwargs):
-        
         if not kwargs or type(kwargs) is not dict:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
@@ -19,9 +18,6 @@ class BaseModel:
             storage.new(self)
         else:
             self.update(kwargs)
-        
-
-
 
     def update(self, kwargs):
         if kwargs and len(kwargs) > 0:
