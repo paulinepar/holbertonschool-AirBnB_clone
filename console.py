@@ -21,7 +21,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_EOF(self):
         return True
-    
+
     def do_EOF(self, line):
         '''quit programm "ctrl D'''
         return True
@@ -61,14 +61,13 @@ class HBNBCommand(cmd.Cmd):
                 raise NameError("** class not found **")
             id = '{}.{}'.format(classes.__name__, arguments[1])
             obj = storage.get(id)
-            
             if obj is None:
                 print("** no instance found **")
                 return
             print(obj)
         except NameError:
             print("** class doesn't exist **")
-            
+
     def do_destroy(self, args):
         '''function that destroy an instance'''
         arguments = args.split()
@@ -78,24 +77,21 @@ class HBNBCommand(cmd.Cmd):
         if len(arguments) == 1:
             print("** instance id missing **")
             return
-
         try:
             classes = eval(arguments[0])
             if not classes.__init__:
                 raise NameError("Name not found")
             id = '{}.{}'.format(classes.__name__, arguments[1])
-
             if not storage.destroy(id):
                 print("** no instance found **")
                 return
             #  Successfull delete
         except NameError:
             print("** class doesn't exist **")
-            
+
     def do_all(self, args):
         '''for print all string representation'''
         arguments = args.split()
-
         all_class = storage.all()
         list = []
         try:
@@ -105,7 +101,6 @@ class HBNBCommand(cmd.Cmd):
                 print(list)
             else:
                 classe = eval(arguments[0])
-                
                 for obj in all_class.values():
                     if isinstance(obj, classe):
                         list.append(str(obj))
@@ -134,20 +129,16 @@ class HBNBCommand(cmd.Cmd):
                 raise NameError("** class doesn't exist **")
             id = '{}.{}'.format(classe.__name__, arguments[1])
             obj = storage.get(id)
-            
             if not obj:
                 print("** no instance found **")
                 return
             key = arguments[2]
             if key == "update_at" or key == "created_at" or key == "id":
                 return
-            
             obj.__setattr__(key, arguments[3])
             obj.save()
-
         except:
             print("** class doesn't exist **")
 
-         
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
