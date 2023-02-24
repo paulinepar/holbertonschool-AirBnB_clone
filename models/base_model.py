@@ -11,10 +11,11 @@ from models import storage
 class BaseModel:
     '''generate class BaseModel'''
     def __init__(self, *args, **kwargs):
-        if not kwargs:
+        
+        if not kwargs or type(kwargs) is not dict:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.updated_at = self.created_at
             storage.new(self)
         else:
             self.update(kwargs)
@@ -33,8 +34,8 @@ class BaseModel:
     def __str__(self):
         '''function str'''
         d = self.to_dict().copy();
-        del d["__class__"]
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, d)
+        return "[{}] ({}) {}".format(BaseModel.__name__, self.id, d)
+
 
     def save(self):
         '''function that update public instance'''
@@ -46,7 +47,7 @@ class BaseModel:
         '''create dictionnary'''
         dictionnary = self.__dict__.copy()
 
-        dictionnary['__class__'] = type(self).__name__
+        dictionnary['__class__'] = "BaseModel"
         dictionnary['created_at'] = self.created_at.isoformat()
         dictionnary['updated_at'] = self.updated_at.isoformat()
         return dictionnary

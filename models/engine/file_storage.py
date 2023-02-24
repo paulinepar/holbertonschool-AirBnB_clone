@@ -15,6 +15,13 @@ class FileStorage:
     
     def all(self):
         return FileStorage.__objects
+    
+    def destroy(self, id):
+        if FileStorage.__objects.get(id):
+            del FileStorage.__objects[id]
+            self.save()
+            return True
+        return False
         
     def new(self, obj):
         """ adds the instance of an object to the dictionary """
@@ -33,6 +40,16 @@ class FileStorage:
     def reload(self):
         """ cette méthode désérialise le fichier JSON pour créer des instances d'objets. """
         from models.base_model import BaseModel
+<<<<<<< HEAD
+=======
+        from models.city import City
+        from models.state import State
+        from models.place import Place
+        from models.review import Review
+        from models.user import User
+        from models.amenity import Amenity
+
+>>>>>>> 8b2f1cc4caf5da420dab141c2246355e2686172e
         try:
             with open(FileStorage.__file_path, "r", encoding='utf-8') as file:
                 data = json.loads(file.read())

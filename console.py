@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 """ Doc """
 from models.base_model import BaseModel
+from models.city import City
+from models.state import State
+from models.place import Place
+from models.review import Review
+from models.user import User
+from models.amenity import Amenity
 import cmd
 from models import storage
 
@@ -38,7 +44,7 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
         except NameError:
-            print("** class doesn't exist **", new_instance)
+            print("** class doesn't exist **")
 
     def do_show(cls, args):
         '''for print instance class'''
@@ -55,44 +61,93 @@ class HBNBCommand(cmd.Cmd):
                 raise NameError("** class not found **")
             id = '{}.{}'.format(classes.__name__, arguments[1])
             obj = storage.get(id)
+            
             if obj is None:
                 print("** no instance found **")
                 return
+            print(obj)
         except NameError:
             print("** class doesn't exist **")
             
     def do_destroy(self, args):
+        '''function that destroy an instance'''
         arguments = args.split()
-        if len(args) == 0:
+        if len(arguments) == 0:
             print("** class name missing **")
-        elif len(arguments) == 1:
-            print("** class doesn't exist **")
+            return
+        if len(arguments) == 1:
+            print("** instance id missing **")
+            return
+
         try:
             classes = eval(arguments[0])
             if not classes.__init__:
                 raise NameError("Name not found")
             id = '{}.{}'.format(classes.__name__, arguments[1])
-            obj = storage.get(id)
-        except NameError:
-            if obj is None:
-                print("** instance id missing **")
 
+            if not storage.destroy(id):
+                print("** no instance found **")
+                return
+            #  Successfull delete
+        except NameError:
+            print("** class doesn't exist **")
+            
     def do_all(self, args):
+        '''for print all string representation'''
         arguments = args.split()
+
         all_class = storage.all()
         list = []
         try:
-            for obj in all_class.values():
-                list.append(obj)
-                print(obj)
+            if len(arguments) == 0:
+                for obj in all_class.values():
+                    list.append(str(obj))
+                print(list)
+            else:
+                classe = eval(arguments[0])
+                
+                for obj in all_class.values():
+                    if isinstance(obj, classe):
+                        list.append(str(obj))
+                print(list)
         except NameError:
-            if arguments not in obj:
-                print("** class doesn't exist **")
+            print("** class doesn't exist **")
 
     def do_update(self, args):
+        '''function that update'''
+        arguments = args.split()
+        if len(arguments) == 0:
+            print("** class name missing **")
+            return
+        if len(arguments) == 1:
+            print("** instance id missing **")
+            return
+        if len(arguments) == 2:
+            print("** attribute name missing **")
+            return
+        if len(arguments) == 3:
+            print("** value missing **")
+            return
+        try:
+            classe = eval(arguments[0])
+            if not classe.__init__:
+                raise NameError("** class doesn't exist **")
+            id = '{}.{}'.format(classe.__name__, arguments[1])
+            obj = storage.get(id)
+            
+            if not obj:
+                print("** no instance found **")
+                return
+            key = arguments[2]
+            if key == "update_at" or key == "created_at" or key == "id":
+                return
+            
+            obj.__setattr__(key, arguments[3])
+            obj.save()
+
+        except:
+            print("** class doesn't exist **")
+
          
-
-
-
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
