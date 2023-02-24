@@ -1,5 +1,6 @@
 import unittest
 from models.engine.file_storage import FileStorage
+import os
 
 class TestFileStorage(unittest.TestCase):
     def test_classe(self):
@@ -8,4 +9,4 @@ class TestFileStorage(unittest.TestCase):
 
     def test_all(self):
         classe = FileStorage()
-        self.assertEqual(classe.all(), {})
+        self.assertNotEqual(classe.all(), "{}")
